@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { NavbarComponent } from "./shared/navbar/navbar.component";
 import { FooterComponent } from './shared/footer/footer.component'
-import { TodoItemsService } from './core/services/todo_items.service';
 import { Observable, of, shareReplay, Subscription } from 'rxjs';
-import { TodoItem } from './core/models';
 import { AsyncPipe } from '@angular/common';
 import { DataViewModule } from 'primeng/dataview';
+import { TasksService } from './core/services/tasks.service';
+import { Task } from './core/models';
 
 @Component({
   selector: 'app-root',
@@ -17,10 +17,10 @@ import { DataViewModule } from 'primeng/dataview';
 export class AppComponent {
   subscriptions = new Subscription()
 
-  todoItems$: Observable<TodoItem[]> = of()
+  tasks$: Observable<Task[]> = of()
 
-  constructor(private todoItemsService: TodoItemsService) {
-    this.todoItems$ = this.todoItemsService.getTodoItems().pipe(shareReplay())
+  constructor(private tasksService: TasksService) {
+    this.tasks$ = this.tasksService.getTasks().pipe(shareReplay())
   }
 
   ngOnDestroy() {
