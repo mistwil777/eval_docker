@@ -1,89 +1,55 @@
-## Built with
+# Projet Todo App avec Docker
 
-The project was developed from scratch with Frontend and Backend technologies, for the communication between the client and the server I implemented a REST API, which is responsible for returning the necessary data in JSON format to the client:
+Ce projet est une application de gestion de tâches (Todo) utilisant une stack moderne et déployée avec Docker.
 
-- Frontend:
-  - Angular
-  - SCSS
-  - PrimeNG Components
+## Stack Technique
 
-- Backend:
-  - Python (Flask)
-  - SQLite (As database manager)
-  - Flask Migrate (To perform migrations)
-  - SQLAlchemy and Flask SQLAlchemy (Python SQL toolkit and ORM that gives application developers the full power and flexibility of SQL)
-  - REST API (For communication between client and server)
+- Frontend: Angular
+- Backend: Flask (Python)
+- Base de données: MySQL
+- Proxy inverse: Nginx
+- Administration de base de données: PHPMyAdmin
+- Service IA: TensorFlow
 
-## Project requirements and how to use it
+## Prérequis
 
-For the project you must run both development environments at the same time, both the Frontend and the Backend. In the Frontend you will find JavaScript technologies (Angualr) and in the Backend you will find Python technologies and tools (Flask), so you must have NodeJS and Python installed on your computer (As a reference this project was developed with version 3.9.6 of Python and 18.12.1 of NodeJS).
+- Docker
+- Docker Compose
 
-I leave you links to NodeJS and Python for installation:
-  - [NodeJS website](https://nodejs.org/en/)
-  - [Python website](https://www.python.org/)
+## Configuration
 
-First of all download the project to start using it, do it from the terminal:
+1. Clonez le dépôt
+2. Assurez-vous que Docker et Docker Compose sont installés sur votre machine
 
-```shell
-$ git clone https://github.com/Skizaru/todo_app.git
+## Démarrage
 
-$ cd todo_app
+Pour lancer l'application, exécutez :
+
+```
+docker-compose up --build
 ```
 
-If you did it correctly and there were no problems, you should see these folders in your terminal:
+Cette commande va construire et démarrer tous les services définis dans le fichier `docker-compose.yml`.
 
-```shell
-/backend
-/frontend
-README.md
+## Services
 
-### Frontend
+- Frontend: Accessible sur http://localhost
+- Backend API: Accessible via http://localhost/api
+- PHPMyAdmin: Accessible sur http://localhost:8080
+- TensorFlow: Service d'IA accessible sur le port 8501
 
-If you already have NodeJS installed on your computer perform the following steps to run the Frontend (Remember that the Backend must be running):
+## Structure du Projet
 
-1. Move to the `/frontend` folder and run the following command to install the necessary:
+- `frontend/`: Code source Angular
+- `backend/`: Code source Flask
+- `docker-compose.yml`: Configuration des services Docker
+- `Dockerfiles`: Un pour le frontend et un pour le backend
 
-```shell
-# This will install what you need for the Frontend (npm comes with NodeJS after installation)
-$ npm install
-```
+## Développement
 
-2. Then you will need to run the following command to start running the Frontend:
+Pour le développement, les volumes sont montés pour permettre le hot-reloading du code frontend et backend.
 
-```shell
-$ npm start
-```
+## Notes
 
-3. That's all for the Frontend, if you haven't run the Backend yet, continue with the next section (Backend)
-
-### Backend
-
-If you already have Python installed on your computer perform the following steps to run the Backend
-
-1. Move to the `/backend` folder and run the following command to create a virtual development environment with Python:
-
-```shell
-# If it doesn't work this way try "python3", this will depend on how you installed Python on your computer
-$ python -m venv venv
-```
-
-2. Now activate the development environment and install the necessary requirements found in the `requirements.txt` file:
-
-```shell
-# This is how it is done in Linux, in Windows it is as follows "venv\Scripts\activate"
-$ . venv/bin/activate
-# Now install the necessary requirements using "pip" or "pip3",
-# this will depend on how you installed Python on your computer
-(venv) $ pip install -r requirements.txt
-
-### REST API
-
-Everything related to the API is inside `flaskr/`. The following table summarizes the routes that were implemented:
-
-| HTTP Method | Resource URL           | Notes                                   |
-| ----------- | -------------------    | --------------------------------------- |
-| `GET`       | */api/v1/tasks*        | Return the collection of all tasks.     |
-| `GET`       | */api/v1/tasks/id*     | Return a single task.                   |
-| `POST`      | */api/v1/tasks*        | Register a new task.                    |
-| `PUT`       | */api/v1/tasks/id*     | Modify the values of a task.            |
-| `DELETE`    | */api/v1/tasks/id*     | Delete a task from the collection.      |
+- Assurez-vous que la variable d'environnement `MODEL_NAME` est correctement définie pour le service TensorFlow.
+- Le projet utilise Node.js v18 pour le frontend Angular.
